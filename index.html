@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#071a3a">
+<title>PRIMExMOVIE — Movies & Natok</title>
+<style>
+:root{--bg:#06152f;--bg2:#0a2250;--panel:#0d2a5b;--panel2:#12366f;--blue:#1769ff;--cyan:#19c6ff;--text:#f4f8ff;--muted:#a9bbd8;--line:#244879;--gold:#ffd166}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% -10%,#174b91 0,transparent 34%),linear-gradient(160deg,#06152f,#071b3d 55%,#041128);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:0;color:white;font-weight:750;transition:.2s}button:hover{filter:brightness(1.12);transform:translateY(-1px)}
+.top{position:sticky;top:0;z-index:10;background:#06152fee;backdrop-filter:blur(14px);border-bottom:1px solid #234879;padding:13px max(16px,calc((100% - 1180px)/2));display:flex;align-items:center;gap:16px;justify-content:space-between}
+.brand{font-weight:950;letter-spacing:.4px;font-size:22px;white-space:nowrap}.brand span{color:#27baff}.nav{display:flex;gap:8px;flex-wrap:wrap}.nav button{background:#12366f;border:1px solid #2b5a9c;padding:9px 14px;border-radius:12px}.nav button.active{background:linear-gradient(100deg,#1264ff,#12b9ee);border-color:transparent}
+.wrap{max-width:1180px;margin:auto;padding:22px 16px 36px}.hero{border:1px solid #2860a5;border-radius:24px;padding:clamp(24px,5vw,48px);background:linear-gradient(115deg,#0b2c63f2,#0755a9c9),radial-gradient(circle at 90% 10%,#1dc9ff66,transparent 35%);box-shadow:0 18px 55px #0005;position:relative;overflow:hidden}.hero:after{content:"▶";position:absolute;right:7%;top:10%;font-size:clamp(90px,18vw,190px);color:#ffffff12}.eyebrow{color:#78d9ff;font-size:12px;font-weight:900;letter-spacing:2px}.hero h1{font-size:clamp(32px,6vw,58px);line-height:1.05;margin:10px 0}.hero p{color:#d2e6ff;max-width:600px;line-height:1.7}.primary{background:linear-gradient(100deg,#145cff,#08b9e9);padding:12px 18px;border-radius:13px;box-shadow:0 8px 22px #087bff44}.secondary{background:linear-gradient(100deg,#164a91,#287bd0);padding:11px 16px;border-radius:12px}.danger{background:linear-gradient(100deg,#b52b50,#ef526a);padding:10px 14px;border-radius:10px}.sectionhead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:28px 0 14px}.sectionhead h2{margin:0;font-size:22px}.searchrow{display:flex;gap:9px;margin:20px 0}.searchrow input,.field input,.field select{width:100%;background:#071a39;border:1px solid #2b5289;color:white;border-radius:12px;padding:12px;outline:none}.searchrow input:focus,.field input:focus,.field select:focus{border-color:#20baff;box-shadow:0 0 0 3px #159eff22}.chips{display:flex;gap:8px;flex-wrap:wrap}.chips button{padding:8px 14px;border-radius:99px;background:#102f62;border:1px solid #2a548d;color:#dbeaff}.chips button.active{background:linear-gradient(100deg,#1264ff,#12b9ee);border-color:transparent}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:16px}.movie{background:linear-gradient(160deg,#12366c,#091d40);border:1px solid #244b7e;border-radius:17px;overflow:hidden;box-shadow:0 10px 24px #0003;cursor:pointer;transition:.2s}.movie:hover{transform:translateY(-4px);border-color:#28baff}.poster{height:220px;background:linear-gradient(140deg,#154e9a,#071b3b);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}.poster img{width:100%;height:100%;object-fit:cover}.poster .placeholder{font-size:42px;color:#8edfff}.tag{position:absolute;top:9px;left:9px;background:#096bceee;padding:5px 9px;border-radius:7px;font-size:11px;font-weight:900}.movieinfo{padding:12px}.movieinfo b{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.movieinfo small{color:var(--muted)}.watchhint{display:block;color:#75d8ff;font-size:12px;margin-top:8px;font-weight:800}
+.empty{border:1px dashed #37639a;padding:28px;text-align:center;border-radius:16px;color:var(--muted);grid-column:1/-1}.panel{background:linear-gradient(160deg,#0d2b5b,#081b3b);border:1px solid #285184;border-radius:18px;padding:18px;margin-top:18px}.field{margin:12px 0}.field label{display:block;font-size:13px;color:#c2d9f8;margin-bottom:7px;font-weight:700}.field input,.field select{margin-top:0}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}.hidden{display:none!important}
+.modal{position:fixed;inset:0;background:#020917eF;z-index:30;display:flex;align-items:center;justify-content:center;padding:16px}.modalbox{width:min(680px,100%);max-height:90vh;overflow:auto;background:#0b2550;border:1px solid #3470b4;border-radius:20px;padding:20px;box-shadow:0 20px 70px #0009}.modalhead{display:flex;justify-content:space-between;align-items:center;gap:10px}.close{background:#234879;border-radius:10px;padding:8px 12px}.notice{background:#092044;border:1px solid #2862a1;border-radius:13px;padding:14px;color:#d9eaff;line-height:1.6;margin:14px 0}.player{width:100%;aspect-ratio:16/9;border:0;border-radius:13px;background:#000;margin-top:12px}.bottomnav{display:none}
+footer{text-align:center;color:#91a9cc;border-top:1px solid #1b3c68;margin-top:42px;padding:22px 10px;font-size:12px}footer a{color:#fff;text-decoration:none;font-weight:900;display:inline-flex;align-items:center;gap:6px}footer svg{width:18px;height:18px;fill:#ff2638}
+@media(max-width:650px){.top{align-items:flex-start;flex-direction:column;gap:10px}.nav{width:100%;display:grid;grid-template-columns:repeat(4,1fr)}.nav button{padding:9px 5px;font-size:12px}.wrap{padding-top:15px}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}.poster{height:210px}.searchrow{flex-direction:column}.hero{border-radius:18px}.bottomnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:12;background:#06152ff2;border-top:1px solid #285184;justify-content:space-around;padding:9px 4px}.bottomnav button{background:transparent;color:#c5dcfa;font-size:11px;padding:5px}.bottomnav button span{display:block;font-size:18px}.wrap{padding-bottom:86px}}
+
+/* Animated welcome / login-style entrance */
+.intro-screen{position:fixed;inset:0;z-index:100;background:radial-gradient(circle at 50% 38%,#123f83 0,#071a3c 42%,#020817 100%);display:flex;align-items:center;justify-content:center;padding:22px;overflow:hidden}
+.intro-screen:before,.intro-screen:after{content:"";position:absolute;width:70vw;height:70vw;max-width:650px;max-height:650px;border:2px solid #20caff55;border-radius:50%;animation:orbit 8s linear infinite;box-shadow:0 0 45px #078dff33,inset 0 0 45px #078dff22}
+.intro-screen:after{width:52vw;height:52vw;animation-direction:reverse;animation-duration:6s;border-color:#a238ff66}
+.intro-card{z-index:1;text-align:center;width:min(440px,100%);padding:36px 24px;border:1px solid #4b9eff88;border-radius:28px;background:#071b3bd9;box-shadow:0 0 35px #087bff55,0 24px 80px #0009;animation:rise .9s ease both}
+.intro-logo{font-size:clamp(35px,9vw,58px);font-weight:1000;letter-spacing:1px;text-shadow:0 0 18px #23baff;animation:logoPulse 2s ease-in-out infinite}
+.intro-logo span{color:#28d9ff}.intro-sub{color:#c4dcff;margin:10px 0 25px;letter-spacing:2px;font-size:12px}
+.intro-orb{width:92px;height:92px;margin:0 auto 22px;border-radius:50%;display:grid;place-items:center;font-size:38px;background:linear-gradient(135deg,#1769ff,#12d5ff,#8b36ff);box-shadow:0 0 15px #22caff,0 0 40px #1769ff;animation:orb 2s ease-in-out infinite}
+.enter-btn{width:100%;padding:15px 18px;border-radius:14px;font-weight:950;letter-spacing:1px;background:linear-gradient(90deg,#075bff,#00b9e9,#a13dff,#075bff);background-size:300% 300%;animation:rgbFlow 4s linear infinite;box-shadow:0 0 22px #138bff88}
+@keyframes orbit{to{transform:rotate(360deg)}}@keyframes rise{from{opacity:0;transform:translateY(28px) scale(.94)}to{opacity:1;transform:translateY(0) scale(1)}}@keyframes logoPulse{50%{text-shadow:0 0 28px #21cfff,0 0 50px #7c35ff}}@keyframes orb{50%{transform:scale(1.12) rotate(12deg)}}@keyframes rgbFlow{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+/* RGB lighting buttons with press reaction */
+button,.movie{position:relative}
+.primary,.secondary,.danger,.chips button,.bottomnav button{border:1px solid #39bfff66;box-shadow:0 0 10px #087bff33;transition:transform .16s ease,filter .16s ease,box-shadow .16s ease}
+.primary,.secondary,.danger{background-size:250% 250%;animation:rgbFlow 7s linear infinite}
+.primary{background-image:linear-gradient(110deg,#075bff,#00b9e9,#713cff,#075bff)}
+.secondary{background-image:linear-gradient(110deg,#123f9b,#087fc5,#5338bd,#123f9b)}
+.danger{background-image:linear-gradient(110deg,#b52862,#e34b76,#7b35c5,#b52862)}
+button:active,.movie:active{animation:pressWiggle .32s ease;transform:scale(.94)}
+@keyframes pressWiggle{0%,100%{transform:scale(.94) rotate(0)}25%{transform:scale(.94) rotate(-2deg)}50%{transform:scale(.94) rotate(2deg)}75%{transform:scale(.94) rotate(-1deg)}}
+.bottomnav{display:flex;position:fixed;bottom:0;left:0;right:0;z-index:12;background:#04132bf2;backdrop-filter:blur(14px);border-top:1px solid #2b70b9;justify-content:center;gap:clamp(4px,3vw,28px);padding:9px 6px calc(9px + env(safe-area-inset-bottom));box-shadow:0 -8px 30px #0005}
+.bottomnav button{min-width:62px;padding:8px 12px;border-radius:12px;background:linear-gradient(130deg,#102e65,#07538b);color:#e9f5ff;font-size:12px}
+.bottomnav button.active{background:linear-gradient(110deg,#075bff,#00b9e9,#783bff);box-shadow:0 0 18px #158bff99}
+.bottomnav button span{display:block;font-size:18px;margin-bottom:2px}
+.wrap{padding-bottom:105px}
+.top{justify-content:center}
+@media(max-width:650px){.top{align-items:center;flex-direction:row}.bottomnav{justify-content:space-around;gap:2px}.bottomnav button{min-width:0;padding:7px 9px;font-size:10px}.wrap{padding-bottom:105px}}
+
+</style>
+</head>
+<body>
+<div class="intro-screen" id="introScreen">
+  <div class="intro-card">
+    <div class="intro-orb">▶</div>
+    <div class="intro-logo">PRIME<span>x</span>MOVIE</div>
+    <div class="intro-sub">MOVIES • NATOK • ENTERTAINMENT</div>
+    <p style="color:#c6dcff;line-height:1.6">Welcome to your premium movie world</p>
+    <button class="enter-btn" onclick="enterWebsite()">LOGIN / ENTER WEBSITE</button>
+  </div>
+</div>
+
+<header class="top"><div class="brand">PRIME<span>x</span>MOVIE</div></header>
+<main class="wrap">
+  <section id="homePage">
+    <div class="hero"><div class="eyebrow">YOUR ENTERTAINMENT DESTINATION</div><h1>Movies & Natok,<br><span style="color:#6fe0ff">All in One Place.</span></h1><p>পছন্দের Movie ও Natok খুঁজে নাও। যেকোনো কনটেন্ট দেখতে প্রথমে BanglaxMovie YouTube চ্যানেলে যাও।</p><button class="primary" onclick="openChannel()">▶ Visit BanglaxMovie</button></div>
+    <div class="searchrow"><input id="search" placeholder="Search movie or natok..." oninput="render()"><button class="primary" onclick="render()">Search</button></div>
+    <div class="chips" id="chips"><button class="active" data-filter="all">All</button><button data-filter="Movie">Movies</button><button data-filter="Natok">Natok</button></div>
+    <div class="sectionhead"><h2 id="listTitle">Latest Collection</h2><small id="count" style="color:#9fb8db"></small></div>
+    <div class="grid" id="catalog"></div>
+  </section>
+  <section id="otherPage" class="hidden">
+    <div class="sectionhead"><h2 id="pageTitle">Profile</h2><button class="secondary" onclick="go('home')">← Home</button></div>
+    <div id="pageContent"></div>
+  </section>
+</main>
+<div class="bottomnav">
+<button data-page="home" onclick="go('home')"><span>⌂</span>Home</button>
+<button data-page="movies" onclick="go('movies')"><span>🎬</span>Movies</button>
+<button data-page="natok" onclick="go('natok')"><span>🎭</span>Natok</button>
+<button data-page="downloads" onclick="go('downloads')"><span>⬇</span>Download</button>
+<button data-page="profile" onclick="go('profile')"><span>◉</span>Profile</button>
+</div>
+<footer>© 2026 PRIMExMOVIE · <a href="https://www.youtube.com/@BanglaxMovie" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.3 3.6z"/></svg>Made by BanglaxMovie</a></footer>
+<div id="modal" class="modal hidden"><div class="modalbox"><div class="modalhead"><h2 id="modalTitle">Watch</h2><button class="close" onclick="closeModal()">✕</button></div><div id="modalBody"></div></div></div>
+<script>
+const CHANNEL='https://www.youtube.com/@BanglaxMovie';
+const KEY='primexmovie_items_v3';
+let items=JSON.parse(localStorage.getItem(KEY)||'[]');
+let filter='all',currentPage='home',selected=null;
+function save(){localStorage.setItem(KEY,JSON.stringify(items));}
+function openChannel(){window.open(CHANNEL,'_blank','noopener');}
+function go(page){
+ currentPage=page;document.querySelectorAll('.bottomnav button[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));
+ document.getElementById('homePage').classList.toggle('hidden',page!=='home');
+ document.getElementById('otherPage').classList.toggle('hidden',page==='home');
+ if(page==='home'){render();return;}
+ const titles={movies:'Movies',natok:'Natok',downloads:'My Downloads',profile:'Profile'};
+ document.getElementById('pageTitle').textContent=titles[page]||'Profile';
+ const content=document.getElementById('pageContent');
+ if(page==='movies'||page==='natok'){
+   const type=page==='movies'?'Movie':'Natok';
+   content.innerHTML='<div class="grid" id="subgrid"></div>';
+   drawGrid(items.filter(x=>x.type===type),document.getElementById('subgrid'));
+ } else if(page==='downloads'){
+   content.innerHTML='<div class="panel"><h3>Download list</h3><p style="color:#b4c9e7">এই ডেমোতে ডাউনলোড করা কনটেন্ট এখানে দেখাবে না। ভিডিওর মালিকের দেওয়া Download link থাকলে সেটি আলাদা করে যোগ করতে হবে।</p></div>';
+ } else {
+   content.innerHTML='<div class="panel"><h3>Welcome to PRIMExMOVIE</h3><p style="color:#b4c9e7">Movies & Natok collection</p><button class="primary" onclick="openChannel()">▶ Visit YouTube Channel</button></div><div class="panel"><h3>Admin Dashboard</h3><p style="color:#b4c9e7">শুধু Admin PIN দিয়ে প্রবেশ করা যাবে।</p><button class="primary" onclick="adminLogin()">🔐 Admin Login</button></div>';
+ }
+}
+function drawGrid(data,el){
+ if(!data.length){el.innerHTML='<div class="empty">এখনো কোনো কনটেন্ট যোগ করা হয়নি। Admin Dashboard থেকে যোগ করো।</div>';return;}
+ el.innerHTML=data.map((m,i)=>`<article class="movie" onclick="openMovie('${m.id}')"><div class="poster">${m.poster?`<img src="${esc(m.poster)}" alt="">`:'<span class="placeholder">▶</span>'}<span class="tag">${esc(m.type)}</span></div><div class="movieinfo"><b>${esc(m.title)}</b><small>${esc(m.year||'PRIMExMOVIE')}</small><span class="watchhint">▶ Watch now</span></div></article>`).join('');
+}
+function render(){
+ const q=(document.getElementById('search')?.value||'').toLowerCase();
+ let data=items.filter(m=>(filter==='all'||m.type===filter)&&(`${m.title} ${m.year||''}`).toLowerCase().includes(q));
+ document.getElementById('count').textContent=data.length+' titles';
+ drawGrid(data,document.getElementById('catalog'));
+}
+function openMovie(id){
+ selected=items.find(x=>x.id===id);if(!selected)return;
+ document.getElementById('modalTitle').textContent=selected.title;
+ document.getElementById('modalBody').innerHTML=`<div class="notice"><b>একটি ছোট ধাপ বাকি!</b><br>ভিডিও দেখার আগে BanglaxMovie YouTube চ্যানেলটি ভিজিট করো। চ্যানেলটি Subscribe করতে পারো। এরপর এই পেজে ফিরে এসে নিচের বাটনে চাপো।<br><small style="color:#9ecbff">নোট: ওয়েবসাইট YouTube subscription স্বয়ংক্রিয়ভাবে যাচাই করতে পারে না।</small></div><button class="primary" style="width:100%" onclick="openChannel()">▶ Open BanglaxMovie Channel</button><button class="secondary" style="width:100%;margin-top:10px" onclick="playSelected()">I visited the channel — Watch now</button>`;
+ document.getElementById('modal').classList.remove('hidden');
+}
+function playSelected(){
+ if(!selected)return;
+ const url=selected.url;
+ let embed=toEmbed(url);
+ if(embed){
+  document.getElementById('modalBody').innerHTML=`<div class="notice">Now playing: <b>${esc(selected.title)}</b></div><iframe class="player" src="${esc(embed)}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><div class="actions"><button class="secondary" onclick="openChannel()">Visit Channel</button><button class="close" onclick="closeModal()">Close</button></div>`;
+ } else {
+  document.getElementById('modalBody').innerHTML=`<div class="notice">এই ভিডিও URL সরাসরি Player-এ চালানো যাচ্ছে না। নিচের বাটনে ভিডিওটি খুলে দেখো।</div><button class="primary" onclick="window.open('${esc(url)}','_blank','noopener')">Open Video Link ↗</button>`;
+ }
+}
+function toEmbed(url){
+ try{
+  const u=new URL(url);
+  if(u.hostname.includes('youtu.be'))return 'https://www.youtube-nocookie.com/embed/'+u.pathname.slice(1);
+  if(u.hostname.includes('youtube.com')){
+   if(u.pathname==='/watch')return 'https://www.youtube-nocookie.com/embed/'+u.searchParams.get('v');
+   if(u.pathname.startsWith('/shorts/'))return 'https://www.youtube-nocookie.com/embed/'+u.pathname.split('/')[2];
+   if(u.pathname.startsWith('/embed/'))return url;
+  }
+ }catch(e){}
+ return null;
+}
+function closeModal(){document.getElementById('modal').classList.add('hidden');selected=null;}
+function adminLogin(){
+ const pin=prompt('Enter Admin PIN');
+ if(pin!=='0707'){if(pin!==null)alert('Wrong PIN');return;}
+ adminPanel();
+}
+function adminPanel(){
+ const c=document.getElementById('pageContent');
+ c.innerHTML=`<div class="panel"><h3>＋ Add Movie / Natok</h3><div class="field"><label>Content title</label><input id="aTitle" placeholder="Movie or Natok name"></div><div class="field"><label>Category</label><select id="aType"><option>Movie</option><option>Natok</option></select></div><div class="field"><label>Video URL (YouTube / MP4 / permitted video link)</label><input id="aUrl" placeholder="https://..."></div><div class="field"><label>Poster image URL (optional)</label><input id="aPoster" placeholder="https://...jpg"></div><div class="field"><label>Year (optional)</label><input id="aYear" placeholder="2026"></div><button class="primary" onclick="addItem()">＋ Add to Website</button></div><div class="panel"><h3>Manage content (${items.length})</h3><div id="manageList"></div></div><div class="panel"><p style="color:#b4c9e7;font-size:13px">PIN 0707 শুধু সাধারণ client-side lock। নিরাপদ Admin access-এর জন্য server/Firebase Authentication প্রয়োজন। এই ব্রাউজারে যোগ করা তালিকা localStorage-এ সেভ হয়; অন্য দর্শকের ডিভাইসে দেখাতে Firebase Database ও Storage লাগবে।</p></div>`;
+ const list=document.getElementById('manageList');
+ list.innerHTML=items.length?items.map(m=>`<div style="display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid #234879;padding:10px 0"><div><b>${esc(m.title)}</b><br><small style="color:#9fb8db">${esc(m.type)} · ${esc(m.url)}</small></div><button class="danger" onclick="removeItem('${m.id}')">Delete</button></div>`).join(''):'<p style="color:#a9bbd8">No content yet.</p>';
+}
+function addItem(){
+ const title=document.getElementById('aTitle').value.trim(),url=document.getElementById('aUrl').value.trim();
+ if(!title||!url){alert('Title এবং Video URL দিতে হবে');return;}
+ try{const u=new URL(url);if(!['http:','https:'].includes(u.protocol))throw 0;}catch(e){alert('Valid http/https URL দাও');return;}
+ items.unshift({id:String(Date.now()),title,type:document.getElementById('aType').value,url,poster:document.getElementById('aPoster').value.trim(),year:document.getElementById('aYear').value.trim()});
+ save();alert('Added! এই ডিভাইসের ওয়েবসাইটে দেখা যাবে।');adminPanel();
+}
+function removeItem(id){if(confirm('Delete this content?')){items=items.filter(x=>x.id!==id);save();adminPanel();}}
+function esc(s){return String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+document.querySelectorAll('#chips button').forEach(b=>b.addEventListener('click',()=>{filter=b.dataset.filter;document.querySelectorAll('#chips button').forEach(x=>x.classList.toggle('active',x===b));document.getElementById('listTitle').textContent=filter==='all'?'Latest Collection':filter==='Movie'?'Movies':'Natok';render();}));
+
+function enterWebsite(){
+ const intro=document.getElementById('introScreen');
+ intro.style.transition='opacity .55s ease, transform .55s ease';
+ intro.style.opacity='0';intro.style.transform='scale(1.04)';
+ setTimeout(()=>{intro.remove();document.body.style.overflow='';},560);
+}
+document.body.style.overflow='hidden';
+document.addEventListener('click',function(ev){
+ const b=ev.target.closest('button');
+ if(!b)return;
+ b.classList.remove('pressed');
+ void b.offsetWidth;
+ b.classList.add('pressed');
+ setTimeout(()=>b.classList.remove('pressed'),360);
+});
+render();
+</script>
+</body></html>
